@@ -1,0 +1,18 @@
+PLUGIN_INTERNAL_LINKS:
+  DESCRIPTION: Sélectionne une page Grav pour créer un lien dans l’éditeur Markdown Admin2.
+  ENABLED: Plugin activé
+  ENABLED_HELP: Ajoute un bouton de lien interne à l’éditeur Markdown Admin2.
+  INSERT_LINK: Insérer un lien interne
+  SEARCH: Rechercher une page
+  PLACEHOLDER: Titre ou chemin
+  PREVIOUS: Précédent
+  NEXT: Suivant
+  CANCEL: Annuler
+  EDITOR_MISSING: Éditeur d’origine introuvable. Cliquez sur le bouton depuis la barre de l’éditeur, puis réessayez.
+  LOADING: Chargement des pages…
+  INVALID_RESPONSE: Réponse API invalide
+  PAGE_COUNT: 'Page {page} / {total}'
+  CHOOSE_PAGE: Choisissez une page.
+  NO_PAGES: Aucune page trouvée.
+  LOAD_ERROR: 'Impossible de charger les pages : {error}'
+  CONTENT_CHANGED: Le contenu ou la sélection a changé. Fermez cette fenêtre et réessayez.

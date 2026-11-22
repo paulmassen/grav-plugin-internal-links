@@ -7,7 +7,7 @@ class HTMLElement {}
 const window = { __GRAV_MODAL_TAG: 'grav-internal-links--modal-page-picker', __GRAV_API_SERVER_URL: 'https://example.test/sub', location: { href: 'https://example.test/sub/admin' } };
 const customElements = { get() {}, define(_name, klass) { Component = klass; } };
 vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../admin-next/modals/page-picker.js'), 'utf8'), { window, customElements, HTMLElement, URL, URLSearchParams, CustomEvent: class { constructor(type, options) { this.type = type; this.detail = options?.detail; } } });
-function run(doc, from, to, route, changed = false) {
+function run(doc, from, to, route, changed = false, prefix = '') {
   let transaction, event;
   const state = { doc: { toString: () => changed ? doc + '!' : doc }, selection: { main: { from, to } }, sliceDoc: (a, b) => doc.slice(a, b) };
   const view = { dom: { isConnected: true }, state, dispatch(value) { transaction = value; }, focus() {} };
@@ -16,7 +16,7 @@ function run(doc, from, to, route, changed = false) {
   picker.snapshot = { from, to, doc };
   picker.status = {};
   picker.dispatchEvent = e => { event = e; };
-  picker.insert(route);
+  picker.insert(route, prefix);
   return { transaction, event, status: picker.status.textContent };
 }
 let result = run('Bonjour monde', 8, 13, '/contact');
@@ -30,7 +30,16 @@ result = run('A [B]', 0, 5, '/ma page');
 assert.equal(result.transaction.changes.insert, '[A \\[B\\]](/sub/ma%20page)');
 result = run('Texte', 0, 5, '/page(1)');
 assert.equal(result.transaction.changes.insert, '[Texte](/sub/page%281%29)');
+result = run('Bonjour', 0, 7, '/contact', false, '/fr');
+assert.equal(result.transaction.changes.insert, '[Bonjour](/sub/fr/contact)');
+result = run('Bonjour', 0, 7, '/', false, '/en');
+assert.equal(result.transaction.changes.insert, '[Bonjour](/sub/en/)');
 result = run('Bonjour', 0, 7, '/contact', true);
 assert.equal(result.transaction, undefined);
-assert.match(result.status, /changé/);
-console.log('modal insertion tests: OK');
+assert.match(result.status, /changed/);
+for (const [locale, message] of [['fr', 'Le contenu a changé'], ['en', 'Content changed'], ['es', 'El contenido ha cambiado']]) {
+  window.__GRAV_I18N = { locale, has: key => key === 'PLUGIN_INTERNAL_LINKS.CONTENT_CHANGED', t: () => message };
+  assert.equal(run('Bonjour', 0, 7, '/contact', true).status, message);
+}
+delete window.__GRAV_I18N;
+console.log('modal insertion and translation tests: OK');
