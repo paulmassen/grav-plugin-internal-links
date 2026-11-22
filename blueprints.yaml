@@ -1,0 +1,23 @@
+name: Internal Links
+slug: internal-links
+type: plugin
+version: 1.0.0
+description: Sélectionne une page Grav pour créer un lien dans l’éditeur Markdown Admin2.
+icon: link
+author:
+  name: Site administrator
+license: MIT
+form:
+  validation: strict
+  fields:
+    enabled:
+      type: toggle
+      label: Plugin activé
+      help: Ajoute un bouton de lien interne à l’éditeur Markdown Admin2.
+      highlight: 1
+      default: 1
+      options:
+        1: Oui
+        0: Non
+      validate:
+        type: bool
