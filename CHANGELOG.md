@@ -1,14 +1,14 @@
 # Changelog
 
-## Non publié
+## Unreleased
 
-- Sélection des pages dans la langue du contenu et préfixe linguistique calculé par Grav.
-- Traduction du bouton, du sélecteur et des réglages en français, anglais et espagnol.
-- Ajout des dépendances et du fichier de licence MIT.
-- Génération de liens Markdown sans chevrons, avec encodage des caractères spéciaux dans l’URL.
-- Hauteur stable de la liste pendant les recherches pour limiter les déplacements de la fenêtre.
+- Select pages in the content language and use the language prefix calculated by Grav.
+- Translate the toolbar button, page picker and settings into English, French and Spanish.
+- Add dependency declarations and the MIT license file.
+- Generate Markdown links without angle brackets, encoding special characters in URLs.
+- Keep the list height stable during searches to reduce dialog movement.
 
 ## 1.0.0
 
-- Ajout d’un sélecteur paginé de pages pour l’éditeur Markdown Admin2.
-- Conservation de la sélection et placement du curseur dans le texte du lien vide.
+- Add a paginated page picker to the Admin2 Markdown editor.
+- Preserve selected text and place the cursor inside an empty link label.
